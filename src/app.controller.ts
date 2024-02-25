@@ -9,4 +9,10 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  // これで@Getデコレータの引数に文字列を入れるとルーティングが設定できる。
+  @Get('goodBye')
+  getGoodBye(): string {
+    return this.appService.getGoodBye();
+  }
 }
