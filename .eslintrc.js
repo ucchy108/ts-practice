@@ -25,5 +25,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'class-methods-use-this': 'off',  // staticに関するエラーを無視する
     'import/prefer-default-export': 'off',  // default-exportのエラーを無視する
+    "max-classes-per-file": 0
   },
 };

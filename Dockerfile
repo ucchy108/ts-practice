@@ -7,3 +7,6 @@ WORKDIR /app
 
 RUN apt-get update && \
   apt-get install -y curl
+
+RUN npm install -g @nestjs/cli
+RUN yarn install
