@@ -2,8 +2,8 @@ version: "3.7"
 services:
   app:
     build: 
-      context: ./app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.app
     tty: true
     ports:
       - 8000:8000
@@ -12,8 +12,8 @@ services:
 
   server:
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.server
     tty: true
     ports:
       - 3000:3000
