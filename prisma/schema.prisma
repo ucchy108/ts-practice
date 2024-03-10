@@ -15,7 +15,19 @@ datasource db {
 
 model Task {
   id Int @id @default(autoincrement())
-  title String @unique
-  due_on DateTime?
-  is_done Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name String
+  detail String?
+  habits Habit[]
+}
+
+model Habit {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  date String @unique
+  note String
+  task Task? @relation(fields: [taskId], references: [id])
+  taskId Int?
 }
