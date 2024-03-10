@@ -6,4 +6,6 @@ ENV TZ=Asia/Tokyo
 WORKDIR /app
 COPY . .
 
+RUN apt-get update -y && apt-get install -y curl
+
 RUN yarn install
