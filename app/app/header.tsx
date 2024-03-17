@@ -8,7 +8,7 @@ export default function Header() {
         <span className="font-semibold text-xl tracking-tight">Tailwind CSS</span>
       </div>
       <div className="flex gap-4 text-xl">
-        <Link href='#'>Tasks</Link>
+        <Link href='tasks'>Tasks</Link>
         <Link href='#'>habits</Link>
         <Link href='#'>Products</Link>
         <Link href='#'>Setting</Link>
