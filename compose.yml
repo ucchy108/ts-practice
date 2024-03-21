@@ -1,25 +1,13 @@
 version: "3.7"
 services:
   app:
-    build: 
-      context: .
-      dockerfile: Dockerfile.app
-    tty: true
-    ports:
-      - 8000:8000
-    volumes:
-      - ./app/:/app
-
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile.server
+    build: .
     tty: true
     ports:
       - 3000:3000
       - 5555:5555
     volumes:
-      - ./server/:/app
+      - ./:/app
     depends_on:
       - db
 
