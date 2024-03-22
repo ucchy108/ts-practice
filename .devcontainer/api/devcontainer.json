@@ -1,0 +1,17 @@
+{
+  "name": "Habit Tracker(API)",
+  "dockerComposeFile": [
+    "../../compose.yml"
+  ],
+  "service": "api",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "rvest.vs-code-prettier-eslint",
+        "Prisma.prisma"
+      ]
+    }
+  }
+}

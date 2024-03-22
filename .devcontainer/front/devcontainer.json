@@ -1,0 +1,16 @@
+{
+  "name": "Habit Tracker(FRONT)",
+  "dockerComposeFile": [
+    "../../compose.yml"
+  ],
+  "service": "front",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "rvest.vs-code-prettier-eslint"
+      ]
+    }
+  }
+}

@@ -1,13 +1,25 @@
 version: "3.7"
 services:
-  app:
-    build: .
+  front:
+    build:
+      context: .
+      dockerfile: ./.devcontainer/front/Dockerfile
+    tty: true
+    ports:
+      - 8000:8000
+    volumes:
+      - ./front:/app
+
+  api:
+    build:
+      context: .
+      dockerfile: ./.devcontainer/api/Dockerfile
     tty: true
     ports:
       - 3000:3000
       - 5555:5555
     volumes:
-      - ./:/app
+      - ./api:/app
     depends_on:
       - db
 
