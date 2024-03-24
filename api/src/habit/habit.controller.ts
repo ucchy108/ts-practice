@@ -13,6 +13,8 @@ import { HabitService } from './habit.service';
 type HabitDto = {
   date: string;
   note: string;
+  taskId: number;
+  achieved: boolean;
 };
 
 @Controller('habit')
@@ -38,12 +40,33 @@ export class HabitController {
     @Param('id') id: string,
     @Body() habitDto: HabitDto,
   ): Promise<Habit> {
-    const { date, note } = habitDto;
+    const { date, note, taskId, achieved } = habitDto;
+
+    const tasks =
+      taskId === undefined
+        ? undefined
+        : {
+            update: [
+              {
+                where: {
+                  habitId_taskId: {
+                    habitId: Number(id),
+                    taskId,
+                  },
+                },
+                data: {
+                  achieved,
+                },
+              },
+            ],
+          };
+
     return this.habitService.update({
       where: { id: Number(id) },
       data: {
         date,
         note,
+        tasks,
       },
     });
   }
