@@ -6,4 +6,4 @@ ENV TZ=Asia/Tokyo
 WORKDIR /app
 COPY ./api .
 
-RUN apt-get update -y && apt-get install -y curl
+RUN apt-get update -y && apt-get install -y curl git
