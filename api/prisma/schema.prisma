@@ -19,7 +19,7 @@ model Task {
   updatedAt DateTime @updatedAt
   name String
   detail String?
-  habits Habit[]
+  habits HabitOnTask[]
 }
 
 model Habit {
@@ -28,6 +28,16 @@ model Habit {
   updatedAt DateTime @updatedAt
   date String @unique
   note String
-  task Task? @relation(fields: [taskId], references: [id])
-  taskId Int?
+  tasks HabitOnTask[]
+}
+
+model HabitOnTask {
+  habit Habit @relation(fields: [habitId], references: [id])
+  habitId Int
+  task Task @relation(fields: [taskId], references: [id])
+  taskId Int
+  achievedAt DateTime @default(now())
+  achieved Boolean
+
+  @@id([habitId, taskId])
 }
