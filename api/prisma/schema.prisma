@@ -14,30 +14,30 @@ datasource db {
 }
 
 model Task {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name String
-  detail String?
-  habits HabitOnTask[]
+  id        Int           @id @default(autoincrement())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  name      String
+  detail    String?
+  habits    HabitOnTask[]
 }
 
 model Habit {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  date String @unique
-  note String
-  tasks HabitOnTask[]
+  id        Int           @id @default(autoincrement())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  date      String        @unique
+  note      String
+  tasks     HabitOnTask[]
 }
 
 model HabitOnTask {
-  habit Habit @relation(fields: [habitId], references: [id])
-  habitId Int
-  task Task @relation(fields: [taskId], references: [id])
-  taskId Int
+  habit      Habit    @relation(fields: [habitId], references: [id])
+  habitId    Int
+  task       Task     @relation(fields: [taskId], references: [id])
+  taskId     Int
   achievedAt DateTime @default(now())
-  achieved Boolean
+  achieved   Boolean
 
   @@id([habitId, taskId])
 }

@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Habit, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { TasksService } from '../tasks/tasks.service'
+import { TasksService } from '../tasks/tasks.service';
 
 @Injectable()
 export class HabitService {
-  constructor(private prisma: PrismaService, private task: TasksService) {}
+  constructor(
+    private prisma: PrismaService,
+    private task: TasksService,
+  ) {}
 
   async find(where: Prisma.HabitWhereUniqueInput): Promise<Habit | null> {
     return this.prisma.habit.findUnique({
@@ -13,31 +16,30 @@ export class HabitService {
       include: {
         tasks: {
           include: {
-            task: true
-          }
-        }
-      }
+            task: true,
+          },
+        },
+      },
     });
   }
 
   async create(data: Prisma.HabitCreateInput): Promise<Habit> {
     const tasks = await this.task.findAll();
-    data.tasks = {
-      create: tasks.map((task) => (
-        {
-          achievedAt: new Date(),
-          achieved: false,
-          task: {
-            connect: {
-              id: task.id
-            }
-          }
-        }
-      ))
-    }
+    const formatData: Prisma.HabitCreateInput = data;
+    formatData.tasks = {
+      create: tasks.map((task) => ({
+        achievedAt: new Date(),
+        achieved: false,
+        task: {
+          connect: {
+            id: task.id,
+          },
+        },
+      })),
+    };
 
     return this.prisma.habit.create({
-      data
+      data: formatData,
     });
   }
 
@@ -46,6 +48,7 @@ export class HabitService {
     data: Prisma.HabitUpdateInput;
   }): Promise<Habit> {
     const { data, where } = params;
+
     return this.prisma.habit.update({
       where,
       data,
