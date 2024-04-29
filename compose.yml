@@ -32,5 +32,13 @@ services:
       POSTGRES_USER: 'user'
       POSTGRES_PASSWORD: 'postgres'
 
+  terraform:
+    build:
+      context: .
+      dockerfile: ./terraform/Dockerfile
+    volumes:
+      - ~/.aws:/root/.aws:ro
+      - ./terraform:/workspaces
+
 volumes:
   db-volume:
