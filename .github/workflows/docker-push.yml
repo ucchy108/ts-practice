@@ -12,9 +12,23 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+
       - name: AWS Configure Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ap-northeast-1
           role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
-      - run: aws s3 ls s3://test-uchihara
+      
+      - name: ECR Login
+        uses: aws-actions/amazon-ecr-login@v2
+        id: login-ecr
+
+      - name: Docker build & push
+        id: build-image
+        env:
+          REGISTRY: ${{ steps.lgin-ecr.outputs.registry }}
+          REPOSITORY: test-uchihara
+          IMAGE_TAG: latest
+        run: |
+          docker build . --tag ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+          docker push ${{ env.env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
