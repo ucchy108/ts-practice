@@ -26,7 +26,7 @@ jobs:
       - name: Docker build & push
         id: build-image
         env:
-          REGISTRY: ${{ steps.lgin-ecr.outputs.registry }}
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: test-uchihara
           IMAGE_TAG: latest
         run: |
