@@ -12,7 +12,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: ./.devcontainer/api/Dockerfile
+      dockerfile: ./api/Dockerfile
     tty: true
     ports:
       - 3000:3000
