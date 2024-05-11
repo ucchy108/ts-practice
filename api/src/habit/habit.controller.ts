@@ -21,11 +21,6 @@ type HabitDto = {
 export class HabitController {
   constructor(private readonly habitService: HabitService) {}
 
-  @Get(':id')
-  async find(@Param('id') id: string): Promise<Habit | null> {
-    return this.habitService.find({ id: Number(id) });
-  }
-
   @Post()
   async create(@Body() habitDto: HabitDto): Promise<Habit> {
     const { date, note } = habitDto;
