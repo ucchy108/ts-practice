@@ -1,18 +1,19 @@
 services:
-  front:
+  web:
     build:
       context: .
-      dockerfile: ./.devcontainer/front/Dockerfile
+      dockerfile: ./docker/web/Dockerfile
     tty: true
     ports:
       - 8000:8000
     volumes:
-      - ./front:/app
+      - ./web:/app
+    command: ['sleep', 'infinity']
 
   api:
     build:
       context: .
-      dockerfile: ./api/Dockerfile
+      dockerfile: ./docker/api/Dockerfile
     tty: true
     ports:
       - 3000:3000
@@ -21,9 +22,10 @@ services:
       - ./api:/app
     depends_on:
       - db
+    command: ['sleep', 'infinity']
 
   db:
-    image: postgres:16.2
+    image: postgres:latest
     ports: 
       - 5432:5432
     volumes:
@@ -31,14 +33,6 @@ services:
     environment:
       POSTGRES_USER: 'user'
       POSTGRES_PASSWORD: 'postgres'
-
-  terraform:
-    build:
-      context: .
-      dockerfile: ./terraform/Dockerfile
-    volumes:
-      - ~/.aws:/root/.aws:ro
-      - ./terraform:/workspaces
 
 volumes:
   db-volume:

@@ -1,9 +1,9 @@
-FROM node:21.6.0-slim
+FROM node:22-slim
 
 ENV LANG=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
 
 WORKDIR /app
-COPY . .
+COPY ./api .
 
 RUN apt-get update -y && apt-get install -y curl git
