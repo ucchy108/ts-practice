@@ -7,3 +7,5 @@ WORKDIR /app
 COPY ./api .
 
 RUN apt-get update -y && apt-get install -y curl git
+
+RUN npm install
