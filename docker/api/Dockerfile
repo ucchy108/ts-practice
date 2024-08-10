@@ -6,6 +6,7 @@ ENV TZ=Asia/Tokyo
 WORKDIR /app
 COPY ./api .
 
-RUN apt-get update -y && apt-get install -y curl git
+RUN apt-get update -y && apt-get install -y curl
 
+RUN npm install -g @nestjs/cli
 RUN npm install
