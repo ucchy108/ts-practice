@@ -12,12 +12,12 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @Post('signup')
+  @Post('regster')
   async create(
     @Body('email') email: string,
     @Body('password') password: string,
     @Body('name') name: string,
   ) {
-    return this.authService.signin(email, name, password);
+    return this.authService.register(email, name, password);
   }
 }

@@ -28,7 +28,7 @@ export class AuthService {
     };
   }
 
-  async signin(email: string, name: string, password: string) {
+  async register(email: string, name: string, password: string) {
     return this.usersService.create(email, name, password);
   }
 }
