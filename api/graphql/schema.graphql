@@ -3,7 +3,14 @@ type Post {
   content: String
 }
 
+type Profile {
+  id: Int!
+  name: String
+  bio: String
+}
+
 type Query {
   post(id: Int!): Post
   posts: [Post]
+  profile(userId: Int!): Profile
 }
