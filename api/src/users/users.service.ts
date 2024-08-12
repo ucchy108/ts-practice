@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   async create(createUser: CreateUserDto): Promise<User | null> {
-    const { email, name, password } = createUser;
+    const { email, password } = createUser;
 
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
@@ -29,14 +29,13 @@ export class UsersService {
     return await this.prisma.user.create({
       data: {
         email,
-        name,
         password: hashedPassword,
       },
     });
   }
 
   async update(updateUser: UpdateUserDto): Promise<User> {
-    const { id, email, name, password } = updateUser;
+    const { id, email, password } = updateUser;
 
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
@@ -48,7 +47,6 @@ export class UsersService {
     return await this.prisma.user.update({
       where: { id: Number(id) },
       data: {
-        name,
         email,
         password: hashedPassword,
       },

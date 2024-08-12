@@ -7,10 +7,6 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  name: string;
-
-  @IsString()
-  @IsNotEmpty()
   password: string;
 }
 
@@ -25,9 +21,35 @@ export class UpdateUserDto {
 
   @IsString()
   @IsNotEmpty()
+  password: string;
+}
+
+export class CreateProfileDto {
+  @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsString()
+  bio: string;
+
+  @IsString()
   @IsNotEmpty()
-  password: string;
+  userId: string;
+}
+
+export class UpdateProfileDto {
+  // @IsString()
+  // @IsNotEmpty()
+  // id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsString()
+  bio: string;
+
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 }
