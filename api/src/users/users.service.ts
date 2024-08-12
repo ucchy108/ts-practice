@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from '../types';
+import { CreateUserDto, UpdateUserDto } from '../types';
 
 @Injectable()
 export class UsersService {
@@ -16,14 +16,17 @@ export class UsersService {
     return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  async create(createUser: CreateUserDto): Promise<User> {
+  async create(createUser: CreateUserDto): Promise<User | null> {
     const { email, name, password } = createUser;
 
-    const isExisted = this.findByEmail(email);
-    if (isExisted) throw new BadRequestException('The email does exist.');
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    if (existingUser)
+      throw new BadRequestException('このemailは既に使われています');
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    return this.prisma.user.create({
+    return await this.prisma.user.create({
       data: {
         email,
         name,
@@ -32,15 +35,18 @@ export class UsersService {
     });
   }
 
-  async update(
-    id: number,
-    email: string,
-    name: string,
-    password: string,
-  ): Promise<User> {
+  async update(updateUser: UpdateUserDto): Promise<User> {
+    const { id, email, name, password } = updateUser;
+
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    if (existingUser)
+      throw new BadRequestException('このemailは既に使われています');
+
     const hashedPassword = await bcrypt.hash(password, 10);
-    return this.prisma.user.update({
-      where: { id },
+    return await this.prisma.user.update({
+      where: { id: Number(id) },
       data: {
         name,
         email,
