@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   async create(createUser: CreateUserDto): Promise<User | null> {
-    const { email, password } = createUser;
+    const { email, password, name, bio } = createUser;
 
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
@@ -30,6 +30,15 @@ export class UsersService {
       data: {
         email,
         password: hashedPassword,
+        profile: {
+          create: {
+            name,
+            bio,
+          },
+        },
+      },
+      include: {
+        profile: true,
       },
     });
   }

@@ -8,6 +8,12 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsString()
+  name: string;
+
+  @IsString()
+  bio: string;
 }
 
 export class UpdateUserDto {
@@ -24,24 +30,7 @@ export class UpdateUserDto {
   password: string;
 }
 
-export class CreateProfileDto {
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-
-  @IsString()
-  bio: string;
-
-  @IsString()
-  @IsNotEmpty()
-  userId: string;
-}
-
 export class UpdateProfileDto {
-  // @IsString()
-  // @IsNotEmpty()
-  // id: string;
-
   @IsString()
   @IsNotEmpty()
   name: string;
