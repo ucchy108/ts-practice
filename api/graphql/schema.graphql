@@ -1,16 +1,22 @@
 type Post {
   id: Int!
   content: String
+  profile: Profile
 }
 
 type Profile {
   id: Int!
   name: String
   bio: String
+  posts: Post[]
 }
 
 type Query {
   post(id: Int!): Post
   posts: [Post]
   profile(userId: Int!): Profile
+}
+
+type Mutation {
+  createPost(content: String!, authorId: Int!): Post!
 }

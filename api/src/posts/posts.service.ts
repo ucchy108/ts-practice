@@ -1,29 +1,28 @@
 import { Injectable } from '@nestjs/common';
-
-type Post = {
-  id: number;
-  content: string;
-};
+import { CreatePostDto } from 'src/types';
+import { Post } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PostsService {
-  async findById(id: number) {
-    const post: Post = {
-      id,
-      content: 'hoge',
-    };
-    return post;
+  constructor(private prisma: PrismaService) {}
+
+  async find(id: number) {
+    return await this.prisma.post.findUnique({ where: { id } });
   }
 
   async findByAll() {
-    const posts: Post[] = [
-      { id: 1, content: 'Post 1' },
-      { id: 2, content: 'Post 2' },
-      { id: 3, content: 'Post 3' },
-      { id: 4, content: 'Post 4' },
-      { id: 5, content: 'Post 5' },
-    ];
+    return await this.prisma.post.findMany();
+  }
 
-    return posts;
+  async create(createPost: CreatePostDto): Promise<Post | null> {
+    const { content, authorId } = createPost;
+
+    return await this.prisma.post.create({
+      data: {
+        content,
+        authorId: Number(authorId),
+      },
+    });
   }
 }

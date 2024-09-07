@@ -68,6 +68,7 @@ describe('UsersService', () => {
         email: user.email,
         name: user.name,
         password: user.password,
+        bio: '',
       };
 
       expect(service.create(createUserDto)).rejects.toThrow(
@@ -83,6 +84,7 @@ describe('UsersService', () => {
         email: user.email,
         name: user.name,
         password: user.password,
+        bio: '',
       };
 
       const result = await service.create(createUserDto);
@@ -97,7 +99,6 @@ describe('UsersService', () => {
         const updateUser: UpdateUserDto = {
           id: String(user.id),
           email: user.email,
-          name: user.name,
           password: user.password,
         };
 
@@ -113,7 +114,6 @@ describe('UsersService', () => {
       const updateUser: UpdateUserDto = {
         id: String(user.id),
         email: user.email,
-        name: user.name,
         password: user.password,
       };
 

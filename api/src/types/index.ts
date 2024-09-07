@@ -42,3 +42,13 @@ export class UpdateProfileDto {
   @IsNotEmpty()
   userId: string;
 }
+
+export class CreatePostDto {
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+
+  @IsString()
+  @IsNotEmpty()
+  authorId: string;
+}
