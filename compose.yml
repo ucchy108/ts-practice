@@ -1,15 +1,4 @@
 services:
-  # web:
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/web/Dockerfile
-  #   tty: true
-  #   ports:
-  #     - 8000:8000
-  #   volumes:
-  #     - ./web:/app
-  #   command: ['sleep', 'infinity']
-
   api:
     build:
       context: .
@@ -22,18 +11,18 @@ services:
       - ./api:/app
     depends_on:
       - db
-    command: ['sleep', 'infinity']
+    command: ["sleep", "infinity"]
 
   db:
     image: postgres:latest
-    ports: 
+    ports:
       - 5432:5432
     volumes:
       - db-volume:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: 'user'
-      POSTGRES_PASSWORD: 'postgres'
-      POSTGRES_DB: 'dev_app'
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "dev_app"
 
 volumes:
   db-volume:

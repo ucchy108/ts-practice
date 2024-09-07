@@ -8,7 +8,7 @@ type Profile {
   id: Int!
   name: String
   bio: String
-  posts: Post[]
+  posts: [Post]
 }
 
 type Query {
@@ -19,4 +19,5 @@ type Query {
 
 type Mutation {
   createPost(content: String!, authorId: Int!): Post!
+  updatePost(id: Int!, content: String): Post!
 }

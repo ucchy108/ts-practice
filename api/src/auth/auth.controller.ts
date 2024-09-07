@@ -13,7 +13,7 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @Post('regster')
+  @Post('register')
   async create(@Body() createUser: CreateUserDto) {
     return this.authService.register(createUser);
   }

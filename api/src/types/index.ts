@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsEmail()
@@ -38,9 +38,9 @@ export class UpdateProfileDto {
   @IsString()
   bio: string;
 
-  @IsString()
+  @IsInt()
   @IsNotEmpty()
-  userId: string;
+  userId: number;
 }
 
 export class CreatePostDto {
@@ -48,7 +48,16 @@ export class CreatePostDto {
   @IsNotEmpty()
   content: string;
 
-  @IsString()
+  @IsInt()
   @IsNotEmpty()
-  authorId: string;
+  authorId: number;
+}
+
+export class UpdatePostDto {
+  @IsInt()
+  @IsNotEmpty()
+  id: number;
+
+  @IsString()
+  content: string;
 }

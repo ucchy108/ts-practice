@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { PostsService } from './posts.service';
-import { CreatePostDto } from '../types';
+import { CreatePostDto, UpdatePostDto } from '../types';
 import { GqlAuthGuard } from '../auth/gql-auth.guard';
 
 @Resolver('Post')
@@ -22,5 +22,11 @@ export class PostsResolver {
   @UseGuards(GqlAuthGuard)
   async createPost(@Args() createPost: CreatePostDto) {
     return this.postsService.create(createPost);
+  }
+
+  @Mutation()
+  @UseGuards(GqlAuthGuard)
+  async updatePost(@Args() updatePost: UpdatePostDto) {
+    return this.postsService.update(updatePost);
   }
 }
